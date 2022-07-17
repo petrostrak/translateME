@@ -10,9 +10,16 @@ func main() {
 	a := app.New()
 	win := a.NewWindow("translateMe")
 
-	from, to, input, output := makeUI()
+	c := config{}
 
-	win.SetContent(container.NewHBox(from, to, container.NewVSplit(input, output)))
+	from, to, input, output := c.makeUI()
+
+	win.SetContent(
+		container.NewVBox(
+			container.NewHBox(from, to),
+			container.NewHSplit(input, output),
+		),
+	)
 
 	win.Resize(fyne.Size{Width: 800, Height: 500})
 	win.CenterOnScreen()
